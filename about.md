@@ -4,12 +4,8 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+From Sydney Australia, I am currently interested in web application security and the emerging fields of AI. I am a strong supporter of the open source movement and the push for computer science education in high school education.
 
-### More Information
+### Open Source Work
 
-A place to include any other types of information that you'd like to include about yourself.
-
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
+I am the package maintainer of Rancat, a random generator for names commonly used for databases, project names, etc. I am also the developer behind the HowLong CLI timing tool.
