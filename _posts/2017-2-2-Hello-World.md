@@ -26,13 +26,21 @@ I had a weak goal of also trying to get as many numbers covered with the minimal
 
 ## The Experiments
 My first lot of experiments ran through the numbers testing equations of the form ((w O x) O y) O z = 10, where O is just a placeholder for random operators and w, x, y, and z are the digits of the carriage number.
+
 Running this with the operator set {+, -, *, /} yielded a 42.09% coverage, a lot lower than I expected. This led me to think about what kinds of tricks my friends and I had deployed on particularly tricky numbers.
+
 In the second test, I added the floor and ceil operators resulting in a hugely positive increase to 67.94%. My hypothesis was looking a tad more likely. What was I missing though?
+
 Another operator that I had been holding off on adding due to the added complexity was the factorial operator. I only allowed factorial to be calculated on the single atomic digits, not the results of other operators. This led to a dramatic performance decrease, even with cached answers, though it raised the coverage to 87.31% which also raised my hopes of a correct hypothesis.
+
 In another attempt to raise the coverage, I switched to variation 2 of the problem (allowing rearrangements of the number) which led to an increase to 97.18% coverage. This particular variation, which still included factorials on the atomic digits, was very very very slow. I knew that if I was to keep experimenting I would need to speed it up somehow. My first instinct was to run the experiment concurrently. Though this led to a small speedup, each number was taking a second or 2 which meant that the computation was still too slow and heavy for my Macbook Air to handle. I needed a boost, and I found that boost in an AWS EC2 c4.8xlarge.
+
 Only ~3% left uncovered, precisely 282 numbers that I could not find a solution for. I thought it would be worth looking at the numbers that failed and where they fell in the range 0000 to 9999. My suspicion was that a large chunk of them would fall below 1000. Unfortunately, there was only 85 failures, which meant I still had 197 lurking within the remaining 9000 numbers.
+
 Moving onto my next experiment my plan was to run through the full 10000 numbers but also keep a track of the failures so that I could rerun the tests on a much smaller range moving forward. _Why didn’t I think of this earlier?_
+
 So to begin with I ran the 2nd experiment again (basic ops and floor/ceil), but keeping track of which numbers failed this time around. Since I’m allowing for rearrangements now, we could reduce the set even more since different sequences of numbers are equivalent. I.e 0114 is the same as 4011, 4101, etc. This speeds up the total computation time as we know that if we can solve for 0114 we also solve the other permutations of those digits.
+
 Adding in factorials led managed to reduce this set to the 282 numbers I was looking for. In my final experiment I added the exponentiation as well as allowing the absolute value operator.
 
 ## The Final Result
@@ -52,5 +60,7 @@ Although I was unable to cover all 10000 numbers, I am happy with the results. F
 {% gist f654432ff5e3abd5dc2eed3fc8447150 %}
 
 In regards to what I have learnt from this problem, I have learnt to focus more on reducing a problem, in how I only needed to test the failures of the previous experiments.
+
 I have yet to find any particular pattern in the failures that would allow me to recognise a number as unsolvable, if any readers spot anything, I would appreciate you passing it onto me. As for the next steps towards 100%, I would like to see factorials added into the calculation on all elements, not just the initial digits.
+
 I hope I have provided an insight into the Sydney Train Carriage Problem and would love to see any further work on the problem, especially a formal proof of whether or not all of the 10000 numbers are solvable. I imagine if not all number 10000 numbers are solvable then then proof might take the form of a contradiction based around either proving 0000 or 1000 are unsolvable.
