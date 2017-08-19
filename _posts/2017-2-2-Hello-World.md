@@ -5,7 +5,7 @@ title: The Sydney Train Carriage Problem
 
 Living in Sydney it is inevitable that I travel via the public transport system, after all the highways are so congested that there is no other option unless you’re in a position to pay exorbitant housing prices, but that’s another story. On the Sydney trains, each carriage has a unique 4 digit number, usually preceded by some letter, printed up on the interior wall. They look like this:
 
-_imagehere_
+![A Train Carriage Number]({{ site.url }}/images/train_carriage_number.png)
 
 It has been a reoccurring game amongst my friends over the past few years that whenever we are on a train we need to try to make 10 using the carriage number. Furthermore, I believe this game is known amongst many Sydneysiders and hence I decided to write about it. The rules are simple though there are a few variations:
 
