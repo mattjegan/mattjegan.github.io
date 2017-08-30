@@ -3,7 +3,7 @@ layout: post
 title: Chasing Pythons Recursion Limit
 ---
 
-I recently saw this post on Facebook:
+I recently saw this post on Facebook, annotated with "Unless you use Python":
 
 ![The meme that started this all]({{ site.url }}/images/computersciencememerecursion.jpg)
 
