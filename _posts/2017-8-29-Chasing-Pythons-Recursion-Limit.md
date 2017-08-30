@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Getting Around Pythons Recursion Limit
+title: Chasing Pythons Recursion Limit
 ---
 
 I recently saw this post on Facebook:
 
 ![The meme that started this all]({{ site.url }}/images/computersciencememerecursion.jpg)
+
 [_Credit Computer Science Memes for Travelling Salesman Teens_](https://www.facebook.com/pg/Computer-Science-Memes-for-Travelling-Salesman-Teens-419913568381772/posts/?ref=page_internal)
 
 This led me to want to contradict the statement, although probably not recommended. So, lets consider the following python program:
