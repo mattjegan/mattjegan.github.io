@@ -9,7 +9,3 @@ From Sydney Australia, I am currently interested in web application security and
 ### Open Source Work
 
 I am the package maintainer of Rancat, a random generator for names commonly used for databases, project names, etc. I am also the developer behind the HowLong CLI timing tool.
-
-### Contact
-
-thisisafakeemail@gmail.com
