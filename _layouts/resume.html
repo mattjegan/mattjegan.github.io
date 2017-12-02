@@ -33,7 +33,7 @@
     <div id="main" role="main" class="container">
       <h2>Experience</h2>
       <div class="jobs">
-        {% for job in site.jobs %}
+        {% for job in site.jobs reversed %}
           <h3 class="job-position">{{ job.position }}</h3>
           <div class="job-subhead">
               <h4 class="job-company">{{ job.company }}</h4>
