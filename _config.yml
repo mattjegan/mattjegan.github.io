@@ -89,3 +89,4 @@ exclude:
 collections:
   - jobs
   - education
+  - others

@@ -6,66 +6,94 @@ body {
     font-family: 'Muli', sans-serif;
 
     h2 {
+        font-size: 20px;
         font-family: 'Muli', sans-serif;
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    h4 {
+        font-size: 12px;
+    }
+
+    .wrapper-masthead {
+        margin-bottom: 0;
     }
 }
 
-.job-position {
+@mixin resume-main-entry {
     margin: 0;
     font-family: 'Muli', sans-serif;
 }
 
-.job-company {
+@mixin resume-secondary-entry {
     margin-top: 0;
     margin-bottom: 0.5em;
     font-family: 'Muli', sans-serif;
+}
 
+@mixin resume-secondary-left {
     width: 50%;
     float: left;
 }
 
-.job-period {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-family: 'Muli', sans-serif;
-
+@mixin resume-secondary-right {
     width: 50%;
     float: right;
     text-align: right;
 }
 
-.job-content {
+@mixin resume-content {
     p {
         text-align: justify;
+        font-size: 14px;
     }
 }
 
-.edu-completion {
-    margin: 0;
-    font-family: 'Muli', sans-serif;
+.resume-atom {
+    @include resume-main-entry();   
 }
 
-.edu-institute {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-family: 'Muli', sans-serif;
+.resume-entity {
+    @include resume-secondary-entry();
+    @include resume-secondary-left();
+}
 
+.resume-period {
+    @include resume-secondary-entry();
+    @include resume-secondary-right();
+}
+
+.resume-content {
+    @include resume-content();
+}
+
+.education {
     width: 50%;
     float: left;
+    padding-right: 0.5em;
 }
 
-.edu-period {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    font-family: 'Muli', sans-serif;
-
+.skills {
     width: 50%;
     float: right;
-    text-align: right;
+    padding-left: 0.5em;
 }
 
-.edu-content {
-    p {
-        text-align: justify;
+.other-efforts {
+    width: 50%;
+}
+
+.jobs {
+    .resume-content {
+        &:last-of-type {
+            p {
+                margin-bottom: 0;
+            }
+        }
     }
 }
