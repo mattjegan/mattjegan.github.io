@@ -39,3 +39,33 @@ body {
         text-align: justify;
     }
 }
+
+.edu-completion {
+    margin: 0;
+    font-family: 'Muli', sans-serif;
+}
+
+.edu-institute {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-family: 'Muli', sans-serif;
+
+    width: 50%;
+    float: left;
+}
+
+.edu-period {
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-family: 'Muli', sans-serif;
+
+    width: 50%;
+    float: right;
+    text-align: right;
+}
+
+.edu-content {
+    p {
+        text-align: justify;
+    }
+}

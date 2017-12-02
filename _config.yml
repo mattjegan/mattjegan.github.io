@@ -88,3 +88,4 @@ exclude:
 # Custom collections
 collections:
   - jobs
+  - education

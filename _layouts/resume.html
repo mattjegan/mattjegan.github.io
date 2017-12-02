@@ -44,7 +44,20 @@
           </div>
         {% endfor %}
       </div>
+
       <h2>Education</h2>
+      <div class="education">
+        {% for edu in site.education reversed %}
+          <h3 class="edu-completion">{{ edu.completion }}</h3>
+          <div class="edu-subhead">
+              <h4 class="edu-institute">{{ edu.institute }}</h4>
+              <h4 class="edu-period">{{ edu.period }}</h4>
+          </div>
+          <div class="edu-content">
+            {{ edu.content }}
+          </div>
+        {% endfor %}
+      </div>
     </div>
 
     {% include analytics.html %}
