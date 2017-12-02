@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
 
     <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
   </head>
@@ -19,33 +20,31 @@
     <div class="wrapper-masthead">
       <div class="container">
         <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
-
           <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+            <h1 class="site-name">Matthew Egan</h1>
+            <p class="site-description">Software Engineer</p>
           </div>
-
-          <nav>
-            <a href="{{ site.baseurl }}/resume">Resume</a>
-          </nav>
-          <nav>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
+          
+          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
         </header>
       </div>
     </div>
 
     <div id="main" role="main" class="container">
-      {{ content }}
-    </div>
-
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
-        </footer>
+      <h2>Experience</h2>
+      <div class="jobs">
+        {% for job in site.jobs %}
+          <h3 class="job-position">{{ job.position }}</h3>
+          <div class="job-subhead">
+              <h4 class="job-company">{{ job.company }}</h4>
+              <h4 class="job-period">{{ job.period }}</h4>
+          </div>
+          <div class="job-content">
+            {{ job.content }}
+          </div>
+        {% endfor %}
       </div>
+      <h2>Education</h2>
     </div>
 
     {% include analytics.html %}
