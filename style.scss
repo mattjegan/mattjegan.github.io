@@ -151,7 +151,7 @@ img {
 //
 
 .wrapper-masthead {
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .masthead {
@@ -288,3 +288,7 @@ footer {
 @import "highlights";
 @import "svg-icons";
 @import "resume";
+
+#top-social {
+  text-align: center;
+}
