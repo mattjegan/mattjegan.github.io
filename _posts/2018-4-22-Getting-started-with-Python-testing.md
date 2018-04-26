@@ -57,7 +57,7 @@ class FibonacciTests(TestCase):
         correct_sequence = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144]
         for index in range(len(correct_sequence)):
             response = fibonacci(index)
-            self.assertEqual(response, correct_sequence[index])
+            assert response == correct_sequence[index]
 ```
 
 This test, `test_returns_correct_fibonacci_number` follows a common testing pattern:
@@ -68,13 +68,14 @@ This test, `test_returns_correct_fibonacci_number` follows a common testing patt
 
 Disclaimer, the fibonacci sequence is an [infinite sequence](https://en.wikipedia.org/wiki/Sequence#Finite_and_infinite) and so we can't test all values but we can be reasonably sure of the correctness. The general advice is to try to test any edge cases, for us that's positions less than `0`, and also test the general case as best you can. While we could have tested hundreds or thousands more numbers, tests are often part of a test suite which might contain hundreds or thousands of tests which each require some time to run. This is a choice that the developer and potentially a QA team need to make as to how quickly you want tests to run versus how sure you need to be about the correctness of the code. Your tests may not ever be complete, even if you have full code coverage, and ultimately it is about reducing the risk that a user is going to come across a bug, that is we want our test suites to find bugs before we release any software to our actual users.
 
-Back to the test and following the advice from above, we choose to test `12` different inputs to the function `fibonacci` (which we are yet to write). For each on of the positions we pass it to the `fibonacci` function and then test that the response from that call matches the expected result from our `correct_sequence` list using the `assertEqual` method that comes along with `TestCase`. `assertEqual` will simply check that the two arguments, the response and the expected response, are actually equal and if not will fail the test.
+Back to the test and following the advice from above, we choose to test `12` different inputs to the function `fibonacci` (which we are yet to write). For each on of the positions we pass it to the `fibonacci` function and then test that the response from that call matches the expected result from our `correct_sequence` list using the `assert` keyword followed by the condition we want to check. In this case, we are asserting that the response from our `fibonacci` function matches the corresponding condition in our expected sequence.
 
 ## Our Second Test
 The second requirement we had for our `fibonacci` function is that it raises a `ValueError` if we pass it any position less than 0. Again, we can't possibly test all numbers less than 0 but it is probably fine for us to just test `-1` in this case since we have already tested `0` in `test_returns_correct_fibonacci_number`. Our code now looks like this:
 
 ```python
 from unittest import TestCase
+import pytest
 
 class FibonacciTests(TestCase):
     def test_returns_correct_fibonacci_number(self):
@@ -84,10 +85,11 @@ class FibonacciTests(TestCase):
             self.assertEqual(response, correct_sequence[index])
 
     def test_raise_value_error_on_negative_input(self):
-        self.assertRaises(ValueError, fibonacci, -1)
+        with pytest.raises(ValueError):
+            fibonacci(-1)
 ```
 
-All we need to do to test that `fibonacci` raises a `ValueError` on `-1` is to use the `assertRaises` method, generously provided by `TestCase`. As the name suggests, it checks that the first argument (an exception type) is raised by calling the second argument (some callable) with the remaining arguments provided.
+To test that `fibonacci` raises a `ValueError` on `-1` we can use the `pytest.raises` context manager as shown above. `pytest.raises` takes our exception type and then passes the test if the code in the scope of the `with` block raises that type of exception.
 
 ## Running Our Tests
 Now that we have our initial tests, it's time to run them. To do this, simply run:
@@ -105,10 +107,11 @@ _________________________________________________________________________ Fibona
 self = <test_fibonacci.FibonacciTests testMethod=test_raise_value_error_on_negative_input>
 
     def test_raise_value_error_on_negative_input(self):
->       self.assertRaises(ValueError, fibonacci, -1)
-E       NameError: name 'fibonacci' is not defined
+        with pytest.raises(ValueError):
+>           fibonacci(-1)
+E           NameError: name 'fibonacci' is not defined
 
-test_fibonacci.py:11: NameError
+test_fibonacci.py:15: NameError
 ___________________________________________________________________________ FibonacciTests.test_returns_correct_fibonacci_number ___________________________________________________________________________
 
 self = <test_fibonacci.FibonacciTests testMethod=test_returns_correct_fibonacci_number>
@@ -119,7 +122,7 @@ self = <test_fibonacci.FibonacciTests testMethod=test_returns_correct_fibonacci_
 >           response = fibonacci(index)
 E           NameError: name 'fibonacci' is not defined
 
-test_fibonacci.py:7: NameError
+test_fibonacci.py:10: NameError
 ========================================================================================= 2 failed in 0.07 seconds =========================================================================================
 ```
 
@@ -157,20 +160,14 @@ test_fibonacci.py F.                                                            
 ================================================================================================= FAILURES =================================================================================================
 _________________________________________________________________________ FibonacciTests.test_raise_value_error_on_negative_input __________________________________________________________________________
 
-self = <test_fibonacci.FibonacciTests testMethod=test_raise_value_error_on_negative_input>
+position = -1883
 
-    def test_raise_value_error_on_negative_input(self):
->       self.assertRaises(ValueError, fibonacci, -1)
+    def fibonacci(position):
+>       if position == 0 or position == 1:
+E       RecursionError: maximum recursion depth exceeded in comparison
 
-test_fibonacci.py:13:
-_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-main.py:12: in fibonacci
-    return fibonacci(position - 2) + fibonacci(position - 1)
-main.py:12: in fibonacci
-    return fibonacci(position - 2) + fibonacci(position - 1)
-E   RecursionError: maximum recursion depth exceeded in comparison
-!!! Recursion detected (same locals & position)
-==================================================================================== 1 failed, 1 passed in 0.08 seconds ====================================================================================
+main.py:10: RecursionError
+==================================================================================== 1 failed, 1 passed in 1.14 seconds ====================================================================================
 ```
 
 While we still have to fix our second test, congratulations on passing your first! It's that pesky `RecursionError` again, how could that have happened? Well, looking at the last line of the function `return fibonacci(position - 2) + fibonacci(position - 1)` if we pass `-1` as the `position` it will keep hitting this line and never exit, so there's our issue. We can fix this by adding a check for negative numbers:
@@ -199,7 +196,7 @@ self = <test_fibonacci.FibonacciTests testMethod=test_returns_correct_fibonacci_
         for index in range(len(correct_sequence)):
 >           response = fibonacci(index)
 
-test_fibonacci.py:9:
+test_fibonacci.py:10:
 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 
 position = 0
