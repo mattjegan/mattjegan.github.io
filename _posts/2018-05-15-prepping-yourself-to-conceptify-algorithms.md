@@ -1,3 +1,8 @@
+---
+layout: post
+title: Prepping Yourself to Conceptify Algorithms
+---
+
 Ever since I found out about concepts, I've been fascinated with them. The other day, I was playing
 a party game, and the question the game asked some of my friends was "If CHRIS had a nightclub, what
 would their secret password be?". The first answer was 'typename T', and the winning answer (by
