@@ -121,7 +121,60 @@ As you can see, our `IntDesc` checks whether or not the value being set is an in
 You sure can, building on some points from the talk, please don't add too much magic to your code as you will confuse beginners and keeping the code simple will lead to greater maintainability. Anyway, we can make two attributes rely on one another by accessing them through the instance argument:
 
 ```python
+from datetime import datetime, timedelta
+from weakref import WeakKeyDictionary
 
+class AgeDesc:
+    def __init__(self):
+        self.data = WeakKeyDictionary()
+
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return self.data[instance]
+
+    def __set__(self, instance, value):
+        if not isinstance(value, int):
+            raise TypeError('Age must be an integer')
+
+        if value < 0:
+            raise ValueError('Age must be a positive integer')
+
+        self.data[instance] = value
+
+
+class DobDesc:
+    def __init__(self):
+        self.data = WeakKeyDictionary()
+
+    def __get__(self, instance, owner):
+        if instance is None:
+            return self
+        return self.data[instance]
+
+    def __set__(self, instance, value):
+        # Check that this date of birth is valid for the instances age
+        if not isinstance(value, datetime):
+            raise TypeError('DoB must be a datetime')
+
+        if (datetime.now() - value).days - (365 * instance.age) > 365:
+            raise ValueError(f"If the age is {instance.age}, the date of birth cannot be {value}")
+
+        self.data[instance] = value
+
+
+class Person:
+    age = AgeDesc()
+    date_of_birth = DobDesc()
+```
+
+Here you can see that we are creating two data descriptors, one for the age and one for the date of birth. The `AgeDesc` simply checks that the age is a number and is positive however the `DobDesc` initial checks the value is a datetime but also verifies that it is a possible date by comparing it to the `age` attribute on the `Person` in its `__set__` method. If it isn't a valid date then it raises an error. For example:
+
+```python
+p = Person()
+p.age = 10
+p.date_of_birth = datetime.now() - timedelta(days=365*10) # Sets the DoB fine
+p.date_of_birth = datetime.now() - timedelta(days=365*20) # Raises a ValueError
 ```
 
 ## Can you pickle a class with a descriptor on it?
