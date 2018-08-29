@@ -69,6 +69,19 @@ Do note however, that our `p2.name` was still set, however it is now just a regu
 
 ## How do descriptors work with slots?
 
+`__slots__` are an interesting feature of Python and allow the programmer to assign fixed memory for their instance attributes rather than having their class use `__dict__`. For example, we can create a `Person` class with a `name` attribute like so:
+
+```python
+class Person:
+    __slots__ = ('name', )
+
+
+p = Person()
+p.name = 'matt'
+```
+
+In CPython, slots are [implemented as descriptors](https://github.com/python/cpython/blob/master/Objects/descrobject.c). I have tried to assign my own descriptor to a slot by declaring a descriptor as usual which doesn't work and I also tried to subclass the slots type to create my own descriptor but that didn't work either. [This stack overflow answer](https://stackoverflow.com/a/47995309/1277637) suggests that we can add extra validations to members of `__slots__` by hiding renamed variables on the class however this adds more descriptors on to the class/instance so you now have 2 attributes for your initial 1.
+
 ## Can you chain descriptors?
 
 When clarifying this question, the question is was better phrased as "Can we combine descriptors for validations?". For this we will be reimplementing the `NonNegativeInteger` descriptor from the original talk however this time we want to implement the integer validation and the non-negative validation as separate descriptors for whatever reason. Note that this is a very simple usecase and probably doesn't require descriptors but I'm using it to demonstrate the concept. We are going to implement a `_validate` hook that any subclass can implement to allow us to add extra validations to the descriptor, the reason we do this is because the superclass will call `self.data[instance] = value` before the end of the method and so we would a dirty dictionary if we just called `super().__set__` from the subclass.
@@ -176,5 +189,3 @@ p.age = 10
 p.date_of_birth = datetime.now() - timedelta(days=365*10) # Sets the DoB fine
 p.date_of_birth = datetime.now() - timedelta(days=365*20) # Raises a ValueError
 ```
-
-## Can you pickle a class with a descriptor on it?
