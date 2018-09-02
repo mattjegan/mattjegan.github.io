@@ -127,6 +127,26 @@ As you can see, our `IntDesc` checks whether or not the value being set is an in
 
 ## Is there a performance penalty for using descriptors?
 
+I was unsure as to whether there was a performance penalty for using descriptors and so I've tested it. The feature I wanted to test performance on was a simple setting of an attribute. For this test we are going to try 5 different approaches:
+
+1. Using a descriptor that stores the value on the instance.
+2. Using a descriptor that stores the value in a `WeakKeyDictionary`.
+3. Storing the value on the instance as normal.
+4. Storing the value using `@property`.
+5. Storing the value using `__setattr__`.
+
+The 5 implementations can be [found on Github](https://github.com/mattjegan/describing-descriptors/tree/master/performance)
+
+My method was to time the implementations while they set a value 1 million times. I repeated this 100 times and averaged the results to try smooth out any outliers. The results are as follows:
+
+* Descriptor storing the value on the instance: 0.144 seconds
+* Descriptor storing the value in a `WeakKeyDictionary`:  0.142 seconds
+* Storing the value on the instance as normal: 0.139 seconds
+* Storing the value using `@property`: 0.382 seconds
+* Storing the value using `__setattr__`: 0.678 seconds
+
+As you can see, both implementations of descriptors were only slightly slower than storing the value directly on the instance whereas `@property` and `__setattr__` were significantly slower on average. All of these benchmarks were ran on my 2017 Macbook Pro.
+
 ## By using descriptors do we lose spatial relativity?
 
 ## Can you have inter-attribute validation?
