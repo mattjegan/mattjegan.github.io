@@ -117,8 +117,70 @@ def square(x):
     return x * x
 ```
 
-## Marshmallow
+## [Marshmallow](https://marshmallow.readthedocs.io/en/3.0/)
 
-## Nameko
+[Marshmallow](https://marshmallow.readthedocs.io/en/3.0/) is a serialization library that I have become fond of due to it's similarity to [Django REST Framework Serializers](https://www.django-rest-framework.org/api-guide/serializers/). It has a declarative style that allows you to very quickly describe the data you are trying to serialize to and from native objects to standard formats like [JSON](https://www.json.org/). Furthermore, Marshmallow allows us to validate our data on load via specifying keyword arguments to the different field types on our schema:
 
-## Pystache
+```python
+from marshmallow import fields, Schema
+
+class AnimalSchema(Schema):
+    name = fields.String(required=True)
+    num_legs = fields.Integer(required=True)
+    color = fields.String(required=True)
+```
+
+Here we have a schema that represents some animal, similar to our glom example. Now we could try load some JSON into this:
+
+```python
+dog = "{\"name\": \"dog\", \"num_legs\": 4}"
+animal = AnimalSchema().loads(dog)
+```
+
+However, Marshmallow realises that this data isn't the correct format since it is missing the `color` field and therefore raises a `ValidationError` alerting us to this fact. Note that if we excluded the `required=True` argument from the color field this would not happen. If we fix the JSON, our call will return to us a native python dictionary ready to be used elsewhere:
+
+```python
+dog = "{\"name\": \"dog\", \"num_legs\": 4, \"color\": \"brown\"}"
+animal = AnimalSchema().loads(dog)
+
+print(animal)  # {'num_legs': 4, 'name': 'dog', 'color': 'brown'}
+```
+
+## [Pystache](https://github.com/defunkt/pystache)
+
+[Pystache](https://github.com/defunkt/pystache) is one of those libraries that is just so simple and gives back so much value so quickly. I first used Pystache when I was writing an email template for an application. It allowed me to worry more about the presentation of the template than getting the data into it due to it's extremely well designed API. Simply put, Pystache is a templating library that allows you to embed variables into large and often complex strings. For example, if we wanted to populate a html template with a number of variables we could do it like so:
+
+```python
+import pystache
+
+template = """
+<h1>{{title}}</h1>
+<h2>{{subtitle}}</h2>
+
+<p>
+{{body}}
+</p>
+"""
+
+context = dict(
+    title="My Post",
+    subtitle="An example of Pystache",
+    body="Pystache is awesome"
+)
+
+print(pystache.render(
+    template,
+    context
+))
+```
+
+and the result would be:
+
+```
+<h1>My Post</h1>
+<h2>An example of Pystache</h2>
+
+<p>
+Pystache is awesome
+</p>
+```
