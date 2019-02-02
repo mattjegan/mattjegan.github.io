@@ -65,7 +65,8 @@ which prints
 
 <style>
 code.red {
-    color: red
+    color: red;
+    background-color: #fbe05b;
 }
 </style>
 
