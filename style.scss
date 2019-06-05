@@ -190,6 +190,7 @@ img {
 
 .site-info {
   float: left;
+  margin-top: 9px;
 
   @include mobile {
     float: none;
