@@ -60,6 +60,7 @@ h2 {
 
   &.headline {
     font-size: 30px;
+    margin-bottom: 0;
   }
 }
 
@@ -125,7 +126,9 @@ img {
 
 .date {
   font-style: italic;
+  font-size: 16px;
   color: $gray;
+  margin: 0;
 }
 
 // Specify the color of the selection

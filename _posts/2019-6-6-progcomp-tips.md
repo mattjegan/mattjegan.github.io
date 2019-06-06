@@ -1,7 +1,6 @@
 ---
-layout: page
-title: Competitive programming tips
-permalink: /progcomp-tips/
+layout: post
+title: Competitive Programming Tips
 ---
 
 These are some rough notes from a session I presented to a number of high school students preparing to compete in a programming competition. The notes are heavily centered around the use of Python 3 however the concepts can be adapted to most languages. If you notice any errors please feel free to let me know in a [Github issue](https://github.com/mattjegan/mattjegan.github.io/issues/new) or [submit a fix here.](https://github.com/mattjegan/mattjegan.github.io/blob/master/progcomp-tips.md)
