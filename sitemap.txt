@@ -4,7 +4,7 @@ https://mattjegan.com/Describing-Descriptors/
 https://mattjegan.com/Getting-started-with-Python-testing/
 https://mattjegan.com/Explained-Simply-P-vs-NP/
 https://mattjegan.com/Chasing-Pythons-Recursion-Limit/
-https://mattjegan.com/Load-testing-at-a-glance/
+https://mattjegan.com/load-testing-at-a-glance/
 https://mattjegan.com/progcomp-tips/
 https://mattjegan.com/Python-packages-you-may-not-have-heard-of/
 https://mattjegan.com/On-Finishing-University/
