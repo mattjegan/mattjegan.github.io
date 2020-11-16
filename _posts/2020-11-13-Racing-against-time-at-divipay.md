@@ -3,7 +3,7 @@ layout: post
 title: Racing against time at DiviPay
 ---
 
-For the last couple year I have been working at [DiviPay](https://divipay.com/) on building the next generation of expense management software covering everything from expense reimbursement for employees to control your budgets and subscription payments to virtual cards. It has been a wild ride so far and has presented many interesting challenges for myself and the team. In this post I will be explaining how we faced into an interesting performance problem and managed to not only solve it but exceed our expectations. 
+For the last couple years I have been working at [DiviPay](https://divipay.com/) on building the next generation of expense management software covering everything from expense reimbursement for employees to controlling your budgets and subscription payments to virtual cards. It has been a wild ride so far and has presented many interesting challenges for myself and the team. In this post I will be explaining how we faced into an interesting performance problem and managed to not only solve it but exceed our expectations. 
 
 ## Payment Cards
 Payment cards are a wide-spread payment method around the world, you probably have one in your wallet right now in the form of a credit or debit card from your bank. In my role I am often working with virtual payment cards which [are a payment method that is very similar to a physical credit/debit card but is only available online.](https://divipay.com/blog/three-reasons-why-you-need-a-virtual-payment-card) These payment cards present some interesting challenges for an engineering team when viewed from both a security and performance perspective.
