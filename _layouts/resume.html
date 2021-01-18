@@ -36,7 +36,11 @@
         {% for job in site.jobs reversed %}
           <h3 class="resume-atom">{{ job.position }}</h3>
           <div class="job-subhead">
-              <h4 class="resume-entity">{{ job.company }}</h4>
+              <h4 class="resume-entity">
+                {% if job.link %}<a href="{{job.link}}">{% endif %}
+                    {{ job.company }}
+                {% if job.link %}</a>{% endif %}
+              </h4>
               <h4 class="resume-period">{{ job.period }}</h4>
           </div>
           <div class="resume-content">
