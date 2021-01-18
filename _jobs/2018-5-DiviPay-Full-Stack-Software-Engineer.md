@@ -1,6 +1,6 @@
 ---
 position: Full-stack Software Engineer
-company: DiviPay
+company: [DiviPay](https://divipay.com)
 period: May 2018 - Current
 ---
 
