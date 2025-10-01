@@ -21,7 +21,7 @@ So the first class of computational problems we are going to talk about is the c
 
 ### NP
 
-The second class of problems we need to know about is NP, which stands for Non-Polynomial. NP represents the class of problems that we don't know we can produce solutions for in some predictable time. For example, we need to sort 5 cards and it takes 5 seconds however sorting 10 cards might take 37 seconds for some reason, and furthermore, 11 cards might take 2 hours. If this were the case for sorting cards, we would call in an NP type problem. Another important fact about NP typed problems is that we must be able to check that the solution is correct very quickly. For example, it might take you ages to give me the solution to the sorted cards, but once you do I can very easily check that they are actually sorted.
+The second class of problems we need to know about is NP, which stands for Nondeterministic Polynomial. NP represents the class of problems that we don't know we can produce solutions for in some predictable time. For example, we need to sort 5 cards and it takes 5 seconds however sorting 10 cards might take 37 seconds for some reason, and furthermore, 11 cards might take 2 hours. If this were the case for sorting cards, we would call in an NP type problem. Another important fact about NP typed problems is that we must be able to check that the solution is correct very quickly. For example, it might take you ages to give me the solution to the sorted cards, but once you do I can very easily check that they are actually sorted.
 
 ## So what's with the whole P vs NP thing?
 
